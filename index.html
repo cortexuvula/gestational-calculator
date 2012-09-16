@@ -12,13 +12,19 @@
 		</style>
 		<!-- Scripts -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-		
+		<script type="text/javascript">
+			$(document).bind("mobileinit", function(){
+				$.mobile.defaultPageTransition="none"
+			});
+		</script>
 		<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 		
 		<!-- Bootstrap code -->
 		<script type="text/javascript">
 			$(document).ready(function(){
 				// Place code here
+				// $(".wrapper").css("display", "none");
+				// $(".wrapper").fadeIn(1500);
 			});
 		</script>
 	</head>
