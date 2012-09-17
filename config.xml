@@ -18,10 +18,10 @@
     </author>
 
     <preference name="target-device" value="handset" />
-    <gap:splash src="images/splash.png" gap:platform="android" gap:density="ldpi" />
-    <gap:splash src="images/splash.png" gap:platform="android" gap:density="mdpi" />
-    <gap:splash src="images/splash.png" gap:platform="android" gap:density="hdpi" />
-    <gap:splash src="images/splash.png" gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="splash.png" gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="splash.png" gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="splash.png" gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="splash.png" gap:platform="android" gap:density="xhdpi" />
     <!-- Blackberry Icons -->
     <icon src="icons/preg.png" gap:platform="blackberry" />
     <!-- Android icons -->

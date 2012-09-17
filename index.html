@@ -4,6 +4,7 @@
 		<title>LNM Calculator</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- CSS Links -->
+		<link rel="stylesheet" type="text/css" href="css/mobiscroll.css">
 		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css">
 		
 		<!-- Custom CSS -->
@@ -15,10 +16,13 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(document).bind("mobileinit", function(){
-				$.mobile.defaultPageTransition="none"
+				$.mobile.defaultPageTransition="none";
+				$.mobile.page.prototype.options.degradeInputs.date = true;
 			});
 		</script>
 		<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+		<script type="text/javascript" src="js/mobiscrollcore.js"></script>
+		<script type="text/javascript" src="js/mobiscroll.js"></script>
 		
 		<!-- Bootstrap code -->
 		<script type="text/javascript">
@@ -104,6 +108,7 @@
 
                 function onPageShow(e,data)
                 {
+                	clearValues();
                     $("#main").css("display", "none");
 					$("#main").fadeIn(1500);
                 }
@@ -116,7 +121,7 @@
 			<div data-role="content" data-theme="b">
 				<fieldset data-role="controlgroup">
 					<label for="date">Last Normal Menstuation:</label>
-					<input type="date" name="date" id="date" value=""  />
+					<input type="date" name="date" id="lnmdate" value=""  />
 				</fieldset>
 				<a href="#result" data-role="button" data-transition="none">Calculate</a>
 			</div>
@@ -129,6 +134,8 @@
 
                 function onPageShow(e,data)
                 {
+                	$("#lnmdate").scroller({ preset: 'date' });
+                	clearValues();
                     $("#lnm").css("display", "none");
 					$("#lnm").fadeIn(1500);
                 }
@@ -168,6 +175,7 @@
 
                 function onPageShow(e,data)
                 {
+                	clearValues();
                     $("#weeksanddays").css("display", "none");
 					$("#weeksanddays").fadeIn(1500);
                 }
@@ -180,7 +188,7 @@
 			<div data-role="content" data-theme="b">
 				<fieldset data-role="controlgroup">
 					<label for="date">Expected Date of Delivery:</label>
-					<input type="date" name="date" id="date" value=""  />
+					<input type="date" name="date" id="edddate" value=""  />
 				</fieldset>
 				<a href="#result" data-role="button" data-transition="none">Calculate</a>
 			</div>
@@ -193,6 +201,8 @@
 
                 function onPageShow(e,data)
                 {
+                	$("#edddate").scroller({ preset: 'date' });
+                	clearValues();
                     $("#edd").css("display", "none");
 					$("#edd").fadeIn(1500);
                 }
@@ -238,6 +248,8 @@
 
                 function onPageShow(e,data)
                 {
+                	$("#pastdate").scroller({ preset: 'date' });
+                	clearValues();
                     $("#pastdateweeksanddays").css("display", "none");
 					$("#pastdateweeksanddays").fadeIn(1500);
                 }
@@ -248,7 +260,7 @@
 				<h1>LNM Calculator</h1>
 			</div>
 			<div data-role="content" data-theme="b">
-				<p>You are in result</p>
+				<p id="displayresult">You are in result</p>
 				<a href="#main" data-role="button" data-transition="none" data-icon="home">Home</a>
 			</div>
 			<div data-role="footer" data-theme="b" data-position="fixed">
@@ -260,9 +272,101 @@
 
                 function onPageShow(e,data)
                 {
+                	var lnm = $('#lnmdate').val();
+                    var weeks = $('#weeks').val();
+                    var days = $('#days').val();
+                    var edd = $('#edddate').val();
+                    var pastdate = $('#pastdate').val();
+                    var pastweeks = $('#pastweeks').val();
+                    var pastdays = $('#pastdays').val();
+                    var result = ""
+                    var now = new Date()
+
+                    if(lnm != ""){
+                        
+                        var lnmDate = checkMonthDate(lnm);                       
+                        var eddDate = new Date(lnmDate.getTime()+(86400000 * 280));
+                        var timeDiff = Math.abs(now.getTime() - lnmDate.getTime());
+                        var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+                        var myweeks = Math.floor(diffDays / 7);
+                        var mydays = diffDays % 7;
+                        result = resultOutput(lnmDate, eddDate, myweeks, mydays);
+
+                    }  else if (edd != ""){
+
+                        var eddDate = checkMonthDate(edd);
+                        var lnmDate = new Date(eddDate.getTime()-(86400000 * 280));
+                        var timeDiff = Math.abs(now.getTime() - lnmDate.getTime());
+                        var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+                        var myweeks = Math.floor(diffDays / 7);
+                        var mydays = diffDays % 7;
+                        result = resultOutput(lnmDate, eddDate, myweeks, mydays);
+
+                    } else if (pastdate != ""){
+                        if (pastweeks == "0" && pastdays == "0"){
+                            result += "Weeks and days can not be 0. Please enter new values."
+                        } else if (pastweeks != "0" || pastdays != "0"){
+                            var pastDate = checkMonthDate(pastdate);
+                            var totalDays = (7 * parseInt(pastweeks, 10)) + parseInt(pastdays, 10);
+                            var lnmDate = new Date(pastDate.getTime()-(1000 * 3600 * 24 * totalDays));
+                            var eddDate = new Date(lnmDate.getTime()+(86400000 * 280));
+                            result = resultOutput(lnmDate, eddDate, pastweeks, pastdays);
+                        }
+                      
+                        
+                    } else if (weeks != "0" || days != "0"){
+                        var totalDays = (7 * parseInt(weeks, 10)) + parseInt(days, 10);
+                        var futureDays = 180 - totalDays;
+                        var lnmtoday = new Date();
+                        lnmtoday.setDate(lnmtoday.getDate()-totalDays)
+                        var lnmDate = new Date(lnmtoday);
+                        var eddtoday = new Date();
+                        eddtoday.setDate(eddtoday.getDate()+futureDays);
+                        var eddDate = new Date(eddtoday);
+                        result = resultOutput(lnmDate, eddDate, weeks, days);
+                    }  else {
+                        result += "You did not enter the values correctly. Please enter new values.";
+                    }                      
+                    $('#displayresult').html(result);
+              
                     $("#result").css("display", "none");
 					$("#result").fadeIn(1500);
                 }
+        </script>
+        <script type="text/javascript">
+        	// Clear values in pages
+        	function clearValues(){
+                $('#lnmdate').val("");
+                $('#weeks').val(0);
+                $('#days').val(0);
+                $('#edddate').val("");
+                $('#pastdate').val("");
+                $('#pastweeks').val(0);
+                $('#pastdays').val(0); 
+                $('#displayresult').html("");
+              }
+            function resultOutput(templnm, tempedd, tempweeks, tempdays){
+                    var result = "";
+
+                    result += "Last Normal Mentruation:</br></br><b>" + templnm.toDateString() + "</b></br></br>";
+                    result += "Expected Date of Delivery:</br></br><b>" + tempedd.toDateString() + "</b></br></br>";
+                    result += "Currently <b>" + tempweeks + " weeks</b> and <b>" + tempdays + " days</b> pregnant.</br></br>";
+                    return result;
+              }
+              // Check if calendar month date is 1 or 2 digits
+            function checkMonthDate(checkDate){   
+            	if (checkDate.substring(0,1) == "0"){
+            		var month = parseInt(checkDate.substring(1,2));
+            	} else {        
+                    var month = parseInt(checkDate.substring(0,2));
+                }
+                var year = parseInt(checkDate.substring(6,10));
+                var day = parseInt(checkDate.substring(3,5));
+                month -= 1;
+                var multiDate = new Date(year, month, day, 0, 0, 0, 0);
+                return multiDate;
+            }
+
         </script>
 	</body>
 </html>
