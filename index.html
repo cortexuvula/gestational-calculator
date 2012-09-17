@@ -58,7 +58,7 @@
 							<a href="#pastdateweeksanddays"  data-transition="none">Past Date, weeks and days</a>
 						</li>
 					</ul>
-				</fieldset>
+				</fieldset></br></br>
 				<p></p>
 				<div data-role="collapsible-set" data-theme="b" data-content-theme="a">
                     <div data-role="collapsible" data-collapsed="true">
@@ -67,17 +67,17 @@
                         </h3>
                         <div>
                             <p>
-                                Select from the selection bar above the appropriate date selection.
+                                Select one of the options from the above list. Once you have entered the correct data in the fields, click on the button to calculate your pregnancy dates. Your results will be displayed in a result window.
                             </p>
-                            <p><u>LNM - Last Normal Mentruation</u></br></br>Submit the last normal mentruation date that is know for the 
+                            <p><u>LNM - Last Normal Mentruation</u></br></br>This is a single date entry option.  Submit the last normal mentruation date that is know for the 
                                 pregnancy.
                             </p>
-                            <p><u>Weeks and Days</u></br></br>Submit the weeks and days of the current pregnancy.
+                            <p><u>Weeks and Days</u></br></br>Two data values need to be submitted, weeks and days of the current pregnancy.
                             </p>
-                            <p><u>EDD - Expected Date of Delivery</u></br></br>Submit the expected date of delivery that is known for the
+                            <p><u>EDD - Expected Date of Delivery</u></br></br>This is a single date entry option.Submit the expected date of delivery that is known for the
                                 pregnancy.
                             </p>
-                            <p><u>Past Date</u></br></br>Submit a past date with its associate weeks/days for the pregnancy.
+                            <p><u>Past Date</u></br></br>Submit a date and with accompanied weeks and days for the pregnancy.
                             </p>
 
                         </div>
@@ -119,10 +119,11 @@
 				<h1>LNM Calculator</h1>
 			</div>
 			<div data-role="content" data-theme="b">
+                </br></br>
 				<fieldset data-role="controlgroup">
 					<label for="date">Last Normal Menstuation:</label>
 					<input type="date" name="date" id="lnmdate" value=""  />
-				</fieldset>
+				</fieldset></br></br>
 				<a href="#result" data-role="button" data-transition="none">Calculate</a>
 			</div>
 			<div data-role="footer" data-theme="b" data-position="fixed">
@@ -147,6 +148,7 @@
 			</div>
 			<div data-role="content" data-theme="b">
 				<div data-role="fieldcontain">
+                    </br></br>
                     <fieldset data-role="controlgroup">
                         <label for="weeks">
                             Weeks:
@@ -162,6 +164,7 @@
                         <input name="days" id="days" placeholder="" value="0" type="range" min="0" max="6">
                     </fieldset>
                 </div>
+                </br></br>
                 <div>
                 	<a href="#result" data-role="button" data-transition="none">Calculate</a>
                 </div>
@@ -186,10 +189,11 @@
 				<h1>LNM Calculator</h1>
 			</div>
 			<div data-role="content" data-theme="b">
+                </br></br>
 				<fieldset data-role="controlgroup">
 					<label for="date">Expected Date of Delivery:</label>
 					<input type="date" name="date" id="edddate" value=""  />
-				</fieldset>
+				</fieldset></br></br>
 				<a href="#result" data-role="button" data-transition="none">Calculate</a>
 			</div>
 			<div data-role="footer" data-theme="b" data-position="fixed">
@@ -213,11 +217,12 @@
 				<h1>LNM Calculator</h1>
 			</div>
 			<div data-role="content" data-theme="b">
+                </br></br>
 				<div data-role="fieldcontain">
 					<fieldset data-role="controlgroup">
 						<label for="pastdate">On this date:</label>
 						<input type="date" name="date" id="pastdate" value=""  />
-					</fieldset>
+					</fieldset></br></br>
 				</div>
 				<div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
@@ -226,7 +231,7 @@
                         </label>
                         <input name="pastweeks" id="pastweeks" placeholder="" value="0" type="range" min="0" max="39">
                     </fieldset>
-                </div>
+                </div></br></br>
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" >
                         <label for="pastdays">
@@ -234,7 +239,7 @@
                         </label>
                         <input name="pastdays" id="pastdays" placeholder="" value="0" type="range" min="0" max="6">
                     </fieldset>
-                </div>
+                </div></br></br>
                 <div>
                 	<a href="#result" data-role="button" data-transition="none">Calculate</a>
                 </div>
@@ -347,7 +352,7 @@
               }
             function resultOutput(templnm, tempedd, tempweeks, tempdays){
                     var result = "";
-
+                    result += "<h3><u>Result:</u></h3>";
                     result += "Last Normal Mentruation:</br></br><b>" + templnm.toDateString() + "</b></br></br>";
                     result += "Expected Date of Delivery:</br></br><b>" + tempedd.toDateString() + "</b></br></br>";
                     result += "Currently <b>" + tempweeks + " weeks</b> and <b>" + tempdays + " days</b> pregnant.</br></br>";
