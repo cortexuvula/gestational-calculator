@@ -16,6 +16,9 @@
     <author href="https://medifoss.org" email="support@medifoss.org">
         Andre Hugo
     </author>
+
+    <preference name="target-device" value="handset" />
+    <gap:splash src="images/splash.png" width="720" heigth="1280">
     <!-- Blackberry Icons -->
     <icon src="icons/preg.png" gap:platform="blackberry" />
     <!-- Android icons -->
