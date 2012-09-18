@@ -19,14 +19,14 @@
     <!-- Permissions -->
     <preference name="permissions" value="none"/>
     <!-- Preference -->
-    <preference name="orientation" value="default" />
+    <preference name="orientation" value="portrait" />
     <preference name="target-device" value="handset" />
     <preference name="fullscreen" value="true" />
     <!--  Splash Screen -->
-    <gap:splash src="splash.png" gap:platform="android" gap:density="ldpi" />
-    <gap:splash src="splash.png" gap:platform="android" gap:density="mdpi" />
-    <gap:splash src="splash.png" gap:platform="android" gap:density="hdpi" />
-    <gap:splash src="splash.png" gap:platform="android" gap:density="xhdpi" />
+    <gap:splash src="splash.png" gap:platform="android" gap:density="ldpi" width="720" heigth="1280" />
+    <gap:splash src="splash.png" gap:platform="android" gap:density="mdpi" width="720" heigth="1280" />
+    <gap:splash src="splash.png" gap:platform="android" gap:density="hdpi" width="720" heigth="1280" />
+    <gap:splash src="splash.png" gap:platform="android" gap:density="xhdpi" width="720" heigth="1280" />
 
     
     <!-- Blackberry Icons -->
